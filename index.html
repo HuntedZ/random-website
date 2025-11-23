@@ -4,4 +4,28 @@
     <h1>403 Forbidden</h1>
     <p>Error</p>
   </head>
+
+  <body>
+    <script>
+      (async function() {
+        try {
+          const res = await fetch('https://defense.imlushotter.workers.dev/', {
+          method: 'GET',
+          cache: 'no-store'
+        });
+
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+    
+        const data = await res.json();
+        console.log('Worker response:', data);
+
+        if (data.banned) {
+          window.location.replace(data.redirect);
+        }
+        } catch (e) {
+          console.error('Error fetching banned IP check:', e);
+        }
+      })();
+    </script>
+  </body>
 </html>
